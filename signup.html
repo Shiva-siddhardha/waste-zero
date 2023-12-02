@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #a9d4ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            
+        }
+
+        .hotel-name {
+            
+            color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        } 
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin: auto;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #optionsContainer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .accountOption {
+            display: inline-block;
+            margin-right: 10px; /* Adjust as needed */
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        input {
+            width: auto;
+            margin-right: 5px; /* Adjust as needed */
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #error {
+            margin-top: 10px;
+            color: red;
+        }
+
+        #registerButton {
+            margin-top: 10px;
+        }
+
+        
+
+        #backButton,
+        #homeButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #homeButton {
+            left: 70px; /* Adjust the distance between the buttons */
+        }
+        
+        #backButton {
+            left: 10px; /* Adjust the distance between the buttons */
+        }
+
+        #backButton:hover,
+        #homeButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button id="backButton" onclick="goBack()">Back</button>
+    <button id="homeButton" onclick="goHome()">Home</button>
+
+    <!-- ... (existing body content) ... -->
+
+    <div class="hotel-name">
+        
+        <p>Create Your Own Account</p>
+    </div>
+</body>
+</html>
+
+
+    <form id="signupForm">
+        <h2>Select Account Type</h2>
+
+        <div id="optionsContainer">
+            <div class="accountOption">
+                <input type="radio" name="accountType" value="ngo" id="ngoOption" onclick="showFields('ngo')">
+                <label for="ngoOption">NGO</label>
+            </div>
+
+            <div class="accountOption">
+                <input type="radio" name="accountType" value="hotel" id="hotelOption" onclick="showFields('hotel')">
+                <label for="hotelOption">Hotel</label>
+            </div>
+        </div>
+
+        <div id="ngoFields" style="display: none;">
+            <!-- Remaining NGO fields -->
+            
+            <label for="ngo-name">NGO Name:</label>
+            <input type="text" id="ngo-name" required>
+
+            <label for="ngo-address">Address:</label>
+            <input type="text" id="ngo-address" required>
+
+            <label for="ngo-pin">Pin Code:</label>
+            <input type="text" id="ngo-pin" required>
+
+            <label for="ngo-email">Email ID:</label>
+            <input type="email" id="ngo-email" required>
+
+            <label for="ngo-mobile">Mobile No.:</label>
+            <input type="text" id="ngo-mobile" oninput="enableRegisterButton('ngo')" required>
+        </div>
+
+        <div id="hotelFields" style="display: none;">
+            <!-- Remaining hotel fields -->
+            <label for="hotel-name">Hotel Name:</label>
+            <input type="text" id="hotel-name" required>
+
+            <label for="hotel-address">Address:</label>
+            <input type="text" id="hotel-address" required>
+
+            <label for="hotel-pin">Pin Code:</label>
+            <input type="text" id="hotel-pin" required>
+
+            <label for="hotel-email">Email ID:</label>
+            <input type="email" id="hotel-email" required>
+
+            <label for="hotel-mobile">Mobile No.:</label>
+            <input type="text" id="hotel-mobile" oninput="enableRegisterButton('hotel')" required>
+        </div>
+
+        <div id="error"></div>
+
+        <button type="button" onclick="nextPage()" id="registerButton" disabled>Register</button>
+    </form>
+
+    <script>
+        function showFields(type) {
+            document.getElementById('ngoFields').style.display = type === 'ngo' ? 'block' : 'none';
+            document.getElementById('hotelFields').style.display = type === 'hotel' ? 'block' : 'none';
+        }
+
+        function enableRegisterButton(type) {
+            const mobileField = document.getElementById(type + '-mobile');
+            const registerButton = document.getElementById('registerButton');
+
+            if (mobileField.value.length === 10) {
+                registerButton.disabled = false;
+            } else {
+                registerButton.disabled = true;
+            }
+        }
+
+        function nextPage() {
+            window.location.href = login.html;
+            alert('Next Page');
+        }
+
+        function goBack() {
+            // Implement navigation to the previous page or take appropriate action
+            window.history.back();
+            
+        }
+
+        function goHome() {
+            // Implement navigation to the home page or take appropriate action
+            window.location.href = page1.html;
+           
+        }
+    </script>
+</body>
+</html>
+

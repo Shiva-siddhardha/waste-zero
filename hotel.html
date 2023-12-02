@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Food App</title>
+    <style>
+    
+        .hotel-name {
+            
+            color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        } 
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: url(meow/111.jpg) no-repeat center center fixed;
+            background-size: cover;
+            
+            
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .me-section {
+            background: orange;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .account-details {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: orange;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            text-align: right;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 150px 0;
+            color: black;
+        }
+
+        .box {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+        
+        .box-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+
+        .white-box {
+            background: white;
+        }
+
+        .grey-box {
+            background: white;
+        }
+
+        .yellow-box {
+            background: white;
+        }
+        
+        .blue-btn {
+      background-color: #2196F3;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .blue-button {
+      background-color: green;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+        
+        
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .green-btn {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .green-btn:hover {
+            background: #45a049;
+        }
+
+        .blue-tick {
+            color: blue;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .ngo-box {
+            background: #ffcc00;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: black; /* Set text color to black */
+        }
+
+        .approve-btn {
+            background: green;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .blue-tick {
+            color: blue;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+         .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+        
+        .transaction-box {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        .green-btn {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .green-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div>
+        <button class="blue-button" onclick="goBack()">Back</button>
+        <button class="blue-button" onclick="goHome()">Home</button>
+    </div>
+    <div class="me-section" onclick="toggleAccountDetails()">My Account</div>
+    <div class="account-details" id="accountDetails">
+        <div class="close-btn" onclick="toggleAccountDetails()">Close</div>
+        <p>Name: John Doe</p>
+        <p>Email: john@example.com</p>
+        <button class="green-btn" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<div class="hotel-name">
+    Hotel XYZ <!-- Replace with your actual hotel name -->
+</div>
+
+<div class="content">
+    <div class="box white-box">
+      <div class="box-container">
+        <h2 style="color: #333;">GOOD FOOD</h2>
+        <form class="input-container">
+            <label for="quantity" style="color: #333;">No. of Food Packets:</label>
+            <input type="text" id="quantity" name="quantity" required>
+
+            <label for="type" style="color: #333;">Type:</label>
+            <select id="type" name="type" required>
+                <option value="veg">Veg</option>
+                <option value="non-veg">Non-Veg</option>
+            </select>
+
+            <button class="green-btn" onclick="uploadGoodFood()">Upload</button>
+        </form>
+    </div></div>
+
+    <div class="box grey-box">
+      <div class="box-container">
+        <h2 style="color: #333;">LEFTOVERS</h2>
+        <form class="input-container">
+            <label for="date" style="color: #333;">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="weight" style="color: #333;">Weight of Food(kgs):</label>
+            <input type="text" id="weight" name="weight" required>
+
+            <button class="green-btn" onclick="uploadLeftovers()">Upload</button>
+        </form>
+    </div></div>
+
+    <div class="box white-box">
+    <p>Available Veg Food: <span id="availableVegSpan">100 packets</span></p>
+    <p>Available Non-Veg Food: <span id="availableNonVegSpan">80 packets</span></p>
+</div>
+
+    <div class="box yellow-box">
+        <h2>REQUESTS</h2>
+        <div class="ngo-box" id="ngo1">
+            <p>NGO 1</p>
+            <p>Required Amount: 15 kg</p>
+            <p>Type: Veg</p>
+            <button class="approve-btn" onclick="approveRequest('ngo1', 15, 'veg')">Approve</button>
+            <div class="blue-tick" id="ngo1Tick"></div>
+            <div class="error-message" id="ngo1Error"></div>
+        </div>
+
+        <div class="ngo-box" id="ngo2">
+            <p>NGO 2</p>
+            <p>Required Amount: 10 kg</p>
+            <p>Type: Non-Veg</p>
+            <button class="approve-btn" onclick="approveRequest('ngo2', 10, 'non-veg')">Approve</button>
+            <div class="blue-tick" id="ngo2Tick"></div>
+            <div class="error-message" id="ngo2Error"></div>
+        </div>
+        
+        <div class="ngo-box" id="ngo3">
+            <p>NGO 3</p>
+            <p>Required Amount: 20 kg</p>
+            <p>Type: Veg</p>
+            <button class="approve-btn" onclick="approveRequest('ngo3', 20, 'veg')">Approve</button>
+            <div class="blue-tick" id="ngo3Tick"></div>
+            <div class="error-message" id="ngo2Error"></div>
+        </div>
+        
+        <div class="ngo-box" id="ngo4">
+            <p>NGO 4</p>
+            <p>Required Amount: 30 kg</p>
+            <p>Type: Veg</p>
+            <button class="approve-btn" onclick="approveRequest('ngo4', 30, 'veg')">Approve</button>
+            <div class="blue-tick" id="ngo4Tick"></div>
+            <div class="error-message" id="ngo2Error"></div>
+        </div>
+        
+        <div class="ngo-box" id="ngo5">
+            <p>NGO 5</p>
+            <p>Required Amount: 15 kg</p>
+            <p>Type: Non-Veg</p>
+            <button class="approve-btn" onclick="approveRequest('ngo5', 15, 'non-veg')">Approve</button>
+            <div class="blue-tick" id="ngo5Tick"></div>
+            <div class="error-message" id="ngo2Error"></div>
+        </div>
+        
+        
+        <button class="green-btn" onclick="confirmAllApprovals()">Approve All</button>
+</div>
+
+<div class="box transaction-box">
+    <h2 style="color: #333;">Transaction</h2>
+    <p>Electricity Bill: Rs.9000</p>
+    <p>Electricity Generated: 220 kWh</p>
+    <p>Final Bill Amount: Rs.7500</p>
+    <button class="green-btn" onclick="payNow()">Pay Now</button>
+    <button class="green-btn" onclick="downloadBill()">Download Bill</button>
+</div>
+
+
+
+<script>
+
+    var availableVeg = 100; // Sample available veg quantity
+    var availableNonVeg = 80; // Sample available non-veg quantity
+
+    function goBack() {
+        window.history.back();
+    }
+
+    function goHome() {
+        window.location.href = 'page1.html';
+    }
+    
+    function toggleAccountDetails() {
+        var accountDetails = document.getElementById('accountDetails');
+        accountDetails.style.display = accountDetails.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function logout() {
+        // Implement logout functionality
+        window.location.href = 'login.html';
+    }
+
+    function uploadGoodFood() {
+        // Implement upload functionality for GOOD FOOD
+    }
+
+    function uploadLeftovers() {
+        // Implement upload functionality for LEFTOVERS
+    }
+    
+    function updateAvailableFoodDisplay() {
+        // Update the content of the spans with the current values
+        document.getElementById('availableVegSpan').innerText = availableVeg;
+        document.getElementById('availableNonVegSpan').innerText = availableNonVeg;
+    }
+    
+    function payNow() {
+        // Implement the pay now functionality
+        alert("Payment successful!");
+    }
+
+    function downloadBill() {
+        // Implement the download bill functionality
+        alert("Downloading bill...");
+    }
+
+    
+    
+
+    
+    function approveRequest(ngoId, requiredAmount, foodType) {
+        var ngoBox = document.getElementById(ngoId);
+        var ngoTick = document.getElementById(ngoId + 'Tick');
+        var ngoError = document.getElementById(ngoId + 'Error');
+
+        // Check if the button has not been already disabled
+        if (ngoBox.contains(ngoBox.lastElementChild) && !ngoTick.innerHTML.includes('Approved')) {
+            if (foodType === 'veg') {
+                if (requiredAmount <= availableVeg) {
+                    availableVeg -= requiredAmount;
+                    ngoTick.innerHTML = '✔ Approved';
+                    ngoBox.removeChild(ngoBox.lastElementChild); // Remove the approve button
+                } else {
+                    ngoError.innerHTML = 'Insufficient funds';
+                }
+            } else if (foodType === 'non-veg') {
+                if (requiredAmount <= availableNonVeg) {
+                    availableNonVeg -= requiredAmount;
+                    ngoTick.innerHTML = '✔ Approved';
+                    ngoBox.removeChild(ngoBox.lastElementChild); // Remove the approve button
+                } else {
+                    alert('Insufficient food');
+                    ngoError.innerHTML = 'Insufficient funds';
+                }
+            }
+
+            // Update the available food display after each approval
+            updateAvailableFoodDisplay();
+        }
+    }
+
+    function confirmAllApprovals() {
+        // Loop through each NGO box
+        for (var i = 1; i <= 5; i++) {
+            var ngoId = 'ngo' + i;
+            var ngoBox = document.getElementById(ngoId);
+            var ngoTick = document.getElementById(ngoId + 'Tick');
+
+            // Check if the NGO box exists and has not been already approved
+            if (ngoBox && ngoBox.contains(ngoBox.lastElementChild) && !ngoTick.innerHTML.includes('Approved')) {
+                var requiredAmount = i * 10; // Sample required amount calculation
+                var foodType = i % 2 === 0 ? 'veg' : 'non-veg'; // Alternating between veg and non-veg
+
+                // Call the existing approveRequest function
+                approveRequest(ngoId, requiredAmount, foodType);
+            }
+        }
+    }
+
+    // Initialize the available food display on page load
+    updateAvailableFoodDisplay();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASTE zero</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for the login box */
+        .login-box {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        /* Styles for the new containers holding the three buttons */
+        .top-button-container {
+            background-color: rgba(0,0,0,0);
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .top-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-buttons-container a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="top-buttons-container">
+            <div class="top-button-container">
+                <a href="#about-us" class="top-button">About Us</a>
+            </div>
+            <div class="top-button-container">
+                <a href="#contacts" class="top-button">Contact</a>
+            </div>
+            <div class="top-button-container">
+                <a href=login.html class="top-button">Login/Signup</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <p></p>
+        </div>
+    </section>
+
+    <section id="about-us">
+        <h2>About Us</h2>
+        <p>Approx. 30-40% of food is wasted in India every day.
+            And there are a lot of people who are sleeping with empty stomachs, as they are not in a position to afford food.
+            So, we came up with this solution that the food which is cooked but unserved can be donated to the people in need, instead of throwing them in the dustbins.
+            So, for this to happen, we are gonna tie up with different NGOs.
+            And if at all the food is not reached to the people in need, then the food can be used to generate electricity by converting the food into biogas.
+            As from the food which is rotted, Methane is released into the environment which is not safe.
+            So, by generating electricity from that food reduces the greenhouse emissions as well.
+            By this solution, we can manage the food waste very effectively, which benefits both the needy people and the environment</p>
+    </section>
+
+    <section id="contacts">
+        <h2>Contact Us</h2>
+        <p> Mail us at: <a href=www.gmail.com class="top-button">wastezero0@gmail.com</a> </p>
+          <p> Telephone No: 040-6996996143, 040-6996996144</p>
+           
+    </section>
+
+    <footer>
+        <p>&copy; 2023 WASTE-ZERO. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Delay the scroll behavior until the page is visible
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.scroll-btn').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    setTimeout(function () {
+                        document.querySelector(anchor.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }, 500); // 500 milliseconds delay (adjust as needed)
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

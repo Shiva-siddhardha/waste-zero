@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        #background {
+      background-color: #a9d4ff;
+      background-position: center;
+      background-attachment: fixed;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .reset-container {
+            width: 350px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .reset-heading {
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #888;
+        }
+
+        .input-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        .reset-button-container {
+            margin-bottom: 10px;
+        }
+
+        .reset-button {
+            padding: 10px 0px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db; /* Blue color for the button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        .verification-code-container {
+            margin-bottom: 20px;
+        }
+
+        .verification-code-input {
+            width: calc(50% - 10px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .password-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .verification-code-button {
+            padding: 10px 0px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db; /* Blue color for the button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .continue-button {
+            padding: 10px 0px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db; /* Blue color for the button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+
+    <div id="background"></div>
+
+    <div class="reset-container">
+        <h2 class="reset-heading">Forgot Password</h2>
+
+        <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <button class="reset-button" onclick="sendVerificationCode()">Send Verification Code</button>
+        </div>
+
+        <div class="verification-code-container" id="verificationCodeContainer" style="display: none;">
+            <label for="verificationCode">Verification Code:</label>
+            <input type="text" id="verificationCode" name="verificationCode" class="verification-code-input" required>
+            <button class="verification-code-button" onclick="checkVerificationCode()">Verify Code</button>
+            <div id="verificationError" class="error-message"></div>
+        </div>
+
+        <div class="password-input" id="newPasswordContainer" style="display: none;">
+            <label for="newPassword">Enter New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+        </div>
+
+        <div class="password-input" id="confirmPasswordContainer" style="display: none;">
+            <label for="confirmPassword">Re-enter New Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+
+        <div class="continue-button-container" id="continueButtonContainer" style="display: none;">
+            <button class="continue-button" onclick="continueToLogin()">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function sendVerificationCode() {
+            // Implement logic to send a verification code to the provided email
+            // For demonstration purposes, display a success message
+            document.getElementById('verificationCodeContainer').style.display = 'block';
+            document.getElementById('verificationError').innerText = '';
+            alert('Verification code sent to your email.');
+        }
+
+        function checkVerificationCode() {
+            // Implement logic to check if the entered verification code is correct
+            var enteredCode = document.getElementById('verificationCode').value;
+            var correctCode = '123456'; // Replace with the actual verification code
+            if (enteredCode === correctCode) {
+                document.getElementById('newPasswordContainer').style.display = 'block';
+                document.getElementById('confirmPasswordContainer').style.display = 'block';
+                document.getElementById('continueButtonContainer').style.display = 'block';
+                document.getElementById('verificationError').innerText = '';
+            } else {
+                document.getElementById('verificationError').innerText = 'Incorrect verification code. Please try again.';
+            }
+        }
+
+        function continueToLogin() {
+            // Implement logic to update the password and continue to the login page
+            var newPassword = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword === confirmPassword) {
+                // Passwords match, continue to login or perform necessary actions
+                window.location.href = "new-page.html"; 
+                alert('Password updated successfully. Continue to login.');
+            } else {
+                alert('Passwords do not match. Please re-enter.');
+            }
+        }
+    </script>
+
+</body>
+</html>

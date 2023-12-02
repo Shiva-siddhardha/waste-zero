@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* Your existing styles */
+         body {
+            font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #a9d4ff;
+    text-align: center;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center;
+        }
+
+        .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    max-width: 150%;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px; /* Adjust margin between image and login box */
+}
+
+.login-container {
+    width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+        .login-heading {
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #888;
+        }
+
+        .input-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        .forgot-password {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .continue-button-container {
+            margin-bottom: 10px;
+        }
+
+        .continue-button {
+            padding: 10px 0px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        .button {
+            padding: 10px 0px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: black;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+
+        imgj {
+            max-width: 70%;
+            height: auto;
+            border-radius: 10px;
+            margin: 50px auto 20px;
+            display: block;
+        }
+
+        .hotel-name {
+            
+            color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        } 
+    </style>
+</head>
+
+<body>
+
+    <button class="back-button" onclick="goBack()">Home</button>
+
+    <div class="hotel-name">
+        Welcome to Waste Zero
+    </div>
+
+    
+    <div class="container">
+        <img src="meow/deepak.png" alt="Logo">
+
+        <div class="login-container">
+            <h2 class="login-heading">LOGIN</h2>
+
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            </div>
+
+            <div class="forgot-password">
+                <a href="forg.html">Forgot Password?</a>
+            </div>
+
+            <div class="continue-button-container">
+                <button class="continue-button" onclick="login()">Continue</button>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+
+            <a href="signup.html" class="button">Don't have an account? Sign Up</a>
+        </div>
+    </div>
+
+    
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function login() {
+            // Get email and password values
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            // Validate if both email and password are entered
+            if (!email || !password) {
+                document.getElementById('error-message').innerHTML = 'Please enter both email and password.';
+                return;
+            }
+
+            // You can replace the following with your actual login logic
+            var userExists = true; // Assume the user exists (replace this with actual logic)
+            var correctPassword = true; // Assume the password is correct (replace this with actual logic)
+
+            if (userExists) {
+                if (correctPassword) {
+                    // Determine the user type and redirect to the corresponding page
+                    var userType = getUserType(email);
+                    redirectToPage(userType);
+                } else {
+                    document.getElementById('error-message').innerHTML = 'Incorrect password. Please try again.';
+                }
+            } else {
+                document.getElementById('error-message').innerHTML = 'This account does not exist. Please enter again';
+            }
+        }
+
+        function getUserType(email) {
+            // You can implement your logic to determine the user type based on the email
+            // For example, check if the email contains specific domains or patterns
+            // Return the user type (e.g., 'ngo', 'hotel', 'electricity')
+            if (email=='ngo@gmail.com') {
+                return 'ngo';
+            }
+            else if (email=='elec@gmail.com') {
+                return 'electricity';
+            }
+            else if (email=='hotel@gmail.com') {
+                return 'hotel';
+            }
+            else {
+                document.getElementById('error-message').innerHTML = 'This account does not exist. Please enter again';
+            }
+        }
+
+        function redirectToPage(userType) {
+            // Redirect to the corresponding page based on the user type
+            switch (userType) {
+                case 'ngo':
+                    window.location.href = 'ngo.html';
+                    break;
+                case 'hotel':
+                    window.location.href = 'hotel.html';
+                    break;
+                case 'electricity':
+                    window.location.href = 'elec.html';
+                    break;
+                // Add more cases for other user types if needed
+                default:
+                    // Handle unknown user types
+                    break;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

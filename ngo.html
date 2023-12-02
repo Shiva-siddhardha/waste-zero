@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Web Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url(meow/111.jpg) no-repeat center center fixed;
+      background-size: cover;
+      
+      color: white;
+    }
+
+    .header {
+        position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0); /* Add a semi-transparent background */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      color: white;
+      z-index: 1000;
+    }
+
+    .me-section {
+      background: orange;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+
+    .me-tab {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background-color: orange;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;}
+      
+      #close-tab {
+      color: white;
+      cursor: pointer;
+      float: right;
+    }
+
+    .box {
+      width: 80%;
+      max-width: 400px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      color: black;
+      position: relative;
+    }
+    
+    .blue-button {
+      background-color: green;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    
+    .green-dot {
+  position: absolute;
+  top: 10px; /* Adjust the distance from the top */
+  right: 10px; /* Adjust the distance from the right */
+  width: 20px;
+  height: 20px;
+  background: green;
+  border-radius: 50%;
+  cursor: help; /* Set cursor to help for information */
+}
+
+/* Add a style for the hover effect */
+.green-dot:hover::after {
+  content: "VEGETARIAN";
+  position: absolute;
+  top: -30px; /* Adjust the distance from the top */
+  right: 0;
+  background: green;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  z-index: 1;
+}
+
+
+    .reserve-btn {
+      float: right;
+      background: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: -24px;
+    }
+
+    .reserved-btn {
+      background: blue;
+    }
+
+    .footer {
+        position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      color: rgba(255, 255, 255, 1);
+      
+      text-align: center;
+      padding: 10px;
+    }
+     .modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: white; /* Semi-transparent blue background */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    z-index: 1000;
+    color: black;
+  }
+
+  #close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: red; /* Red color for the close button */
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 999;
+  }
+  
+  .quantity-slot {
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa; /* Light gray color for the placeholder text */
+    pointer-events: none;
+  }
+
+  .quantity-slot input {
+    width: calc(100% - 20px);
+    padding: 5px;
+    padding-left: 10px;
+    box-sizing: border-box;
+  }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <button class="blue-button" onclick="goBack()">Back</button>
+      <button class="blue-button" onclick="goHome()">Home</button>
+    </div>
+    <div class="me-section" onclick="toggleMeTab()">My Account</div>
+  </div>
+  
+  <h1 style="text-align: center; color: black; margin-top: 50px;">NGO Name</h1>
+  
+  <div class="modal" id="quantityModal">
+  <div id="close-modal" onclick="closeModal()">✖</div>
+  <label for="quantityInput">Enter Quantity:</label>
+  <div class="quantity-slot">
+    <span class="placeholder-text">Enter Quantity</span>
+    <input type="number" id="quantityInput" min="0" oninput="handleInput()">
+  </div>
+  <button class="blue-button" onclick="confirmReservation()">Reserve</button>
+</div>
+
+  <!-- Overlay to cover the page when the modal is open -->
+  <div class="overlay" id="overlay" onclick="closeModal()"></div>
+
+  <div class="me-tab" id="meTab">
+    <!-- Account details here -->
+    <p>Name: John Doe</p>
+    <p>Email: john@example.com</p>
+    <button class="blue-button" onclick="logout()">Logout</button>
+    <div id="close-tab" onclick="toggleMeTab()">Close</div>
+    <!--<button onclick="closeMeTab()">Close</button>-->
+  </div>
+
+  <div class="box" data-hotel-id="1" data-quantity="50">
+  <div class="green-dot"></div> <!-- Add this line for the green dot inside the box -->
+  <h2>Hotel A</h2>
+  <p>Quantity: 50 packets</p>
+  <button class="reserve-btn" onclick="reserveHotel(1)">Reserve</button>
+</div>
+
+
+  <!-- Repeat the box structure for other hotels -->
+  <div class="box" data-hotel-id="2" data-quantity="30">
+  <div class="green-dot"></div> <!-- Add this line for the green dot inside the box -->
+  <h2>Hotel B</h2>
+  <p>Quantity: 30 packets</p>
+  <button class="reserve-btn" onclick="reserveHotel(2)">Reserve</button>
+</div>
+
+
+
+  <div class="box" data-hotel-id="3" data-quantity="50">
+  <h2>Hotel C</h2>
+  <p>Quantity: 40 packets</p>
+  <button class="reserve-btn" onclick="reserveHotel(3)">Reserve</button>
+</div>
+
+<div class="box" data-hotel-id="4" data-quantity="50">
+  <h2>Hotel D</h2>
+  <p>Quantity: 30 packets</p>
+  <button class="reserve-btn" onclick="reserveHotel(4)">Reserve</button>
+</div>
+
+<div class="box" data-hotel-id="5" data-quantity="50">
+  <div class="green-dot"></div> <!-- Add this line for the green dot inside the box -->
+  <h2>Hotel E</h2>
+  <p>Quantity: 25 packets</p>
+  <button class="reserve-btn" onclick="reserveHotel(5)">Reserve</button>
+</div>
+
+<div class="box" data-hotel-id="6" data-quantity="50">
+  <h2>Hotel F</h2>
+  <p>Quantity: 12 packets</p>
+  <button class="reserve-btn" onclick="reserveHotel(6)">Reserve</button>
+</div>
+
+<div class="box" data-hotel-id="7" data-quantity="50">
+  <h2>Hotel G</h2>
+  <p>Quantity: 45 packets</p>
+  <button class="reserve-btn" onclick="reserveHotel(7)">Reserve</button>
+</div>
+
+
+
+  
+
+  
+
+  <script>
+    function goBack() {
+        window.history.back();
+    }
+
+    function goHome() {
+        window.location.href = 'page1.html';
+    }
+
+    function toggleMeTab() {
+      const meTab = document.getElementById('meTab');
+      meTab.style.display = meTab.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function closeMeTab() {
+      const meTab = document.getElementById('meTab');
+      meTab.style.display = 'none';
+    }
+    
+    function handleInput() {
+    const placeholderText = document.querySelector('.placeholder-text');
+    const quantityInput = document.getElementById('quantityInput');
+
+    if (quantityInput.value.trim() !== '') {
+      placeholderText.style.display = 'none';
+    } else {
+      placeholderText.style.display = 'block';
+    }
+  }
+    
+    function reserveHotel(hotelId) {
+    const box = document.querySelector(`.box[data-hotel-id="${hotelId}"]`);
+    const availableQuantity = parseInt(box.dataset.quantity);
+
+    // Show the quantity input modal
+    const modal = document.getElementById('quantityModal');
+    const overlay = document.getElementById('overlay');
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+
+    // Save the hotelId and availableQuantity in the modal for later use
+    modal.dataset.hotelId = hotelId;
+    modal.dataset.availableQuantity = availableQuantity;
+  }
+
+  function confirmReservation() {
+  const modal = document.getElementById('quantityModal');
+  const hotelId = modal.dataset.hotelId;
+  const availableQuantity = parseInt(modal.dataset.availableQuantity);
+  const quantityInput = document.getElementById('quantityInput');
+  const quantityToReserve = parseInt(quantityInput.value);
+
+  if (!isNaN(quantityToReserve) && quantityToReserve >= 0 && quantityToReserve <= availableQuantity) {
+    const confirmation = confirm('Do you want to reserve this hotel?');
+    if (confirmation) {
+      // Update the quantity and button text, then close the modal
+      const box = document.querySelector(`.box[data-hotel-id="${hotelId}"]`);
+      const reserveBtn = box.querySelector('.reserve-btn');
+      const quantitySpan = box.querySelector(`#quantity${hotelId}`);
+      
+      // Update the button text and style
+      reserveBtn.textContent = 'Reserved';
+      reserveBtn.classList.add('reserved-btn');
+      
+      // Update the quantity display
+      quantitySpan.textContent = availableQuantity - quantityToReserve;
+
+      closeModal();
+      toggleMeTab();
+    }
+  } else {
+    alert('Error: Please enter a valid quantity.');
+  }
+}
+
+
+  function closeModal() {
+    // Hide the modal and overlay
+    document.getElementById('quantityModal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+
+    // Clear the quantity input value
+    document.getElementById('quantityInput').value = '';
+  }
+
+
+
+    function logout() {
+      // Implement logout logic 
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
